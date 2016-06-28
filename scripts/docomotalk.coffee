@@ -4,6 +4,9 @@
 # Author:
 #   FromAtom
 
+
+ignore = require('./config/ignore')
+
 getTimeDiffAsMinutes = (old_msec) ->
   now = new Date()
   old = new Date(old_msec)
@@ -13,9 +16,12 @@ getTimeDiffAsMinutes = (old_msec) ->
 
 module.exports = (robot) ->
   robot.respond /(\S+)/i, (msg) ->
+    #  コピペだからわかんない
     DOCOMO_API_KEY = process.env.DOCOMO_API_KEY
     message = msg.match[1]
     return unless DOCOMO_API_KEY && message
+    #	コマンドは無視する処理
+    return unless ignore.indexOf(message) is -1
 
     ## ContextIDを読み込む
     KEY_DOCOMO_CONTEXT = 'docomo-talk-context'
