@@ -147,7 +147,7 @@ module.exports = (robot) ->
 					channel	: channel
 				}
 		)
-		weatherCron		= new Cron('0 0 6-22/3 * * *',() =>
+		weatherCron		= new Cron('0 0 8,13,19 * * *',() =>
 			checkWeather obj, (data) ->
 				robot.emit 'slack.attachment',
 				{
